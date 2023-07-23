@@ -8,18 +8,36 @@ import {
 const magazineReducer = (state, action) => {
   switch (action.type) {
     case ADD_PRODUCT:
-      return {
-        ...state,
-        products: [
-          {
-            name: action.payload.name,
-            country: action.payload.country,
-            price: action.payload.price,
-            id: action.payload.id,
-          },
-          ...state.products,
-        ],
-      };
+      const productIndexInOUT = state.products.findIndex((item) => {
+        return item.id === action.payload.id;
+      });
+      if (productIndexInOUT === -1) {
+        return {
+          ...state,
+          products: [
+            {
+              name: action.payload.name,
+              country: action.payload.country,
+              price: action.payload.price,
+              id: action.payload.id,
+              quantity: 1,
+            },
+            ...state.products,
+          ],
+        };
+      } else {
+        return {
+          ...state,
+          products: [
+            ...state.products.slice(0, productIndexInOUT),
+            {
+              ...state.products[productIndexInOUT],
+              quantity: state.products[productIndexInOUT].quantity + 1,
+            },
+            ...state.products.slice(productIndexInOUT + 1),
+          ],
+        };
+      }
 
     case REMOVE_PRODUCT:
       return {
