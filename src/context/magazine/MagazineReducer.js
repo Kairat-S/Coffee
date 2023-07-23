@@ -15,7 +15,7 @@ const magazineReducer = (state, action) => {
             name: action.payload.name,
             country: action.payload.country,
             price: action.payload.price,
-            id: state.products.length + 1,
+            id: action.payload.id,
           },
           ...state.products,
         ],
@@ -24,7 +24,7 @@ const magazineReducer = (state, action) => {
     case REMOVE_PRODUCT:
       return {
         ...state,
-        product: [
+        products: [
           ...state.products.filter((item) => item.id !== action.payload),
         ],
       };

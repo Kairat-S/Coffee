@@ -1,6 +1,11 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { DECREASE_COUNT, INCREASE_COUNT } from "../context/Types";
+import {
+  ADD_PRODUCT,
+  DECREASE_COUNT,
+  INCREASE_COUNT,
+  REMOVE_PRODUCT,
+} from "../context/Types";
 import magazineContext from "../context/magazine/MagazineContext";
 
 export default function CoffeeCatalogItem({
@@ -12,13 +17,28 @@ export default function CoffeeCatalogItem({
   countryExist,
 }) {
   const dollarToTenge = 450;
-  const priceValue = price.slice(0, -1);
+  const priceValue = price.slice(0, -1) * dollarToTenge;
   const [state, dispatch] = useContext(magazineContext);
+
   const startCount = () => {
     console.log("item price: ", priceValue);
-    console.log("tenge price: ", priceValue * dollarToTenge);
-    dispatch({ type: INCREASE_COUNT, payload: priceValue * dollarToTenge });
+    dispatch({ type: INCREASE_COUNT, payload: priceValue });
   };
+
+  const addToCart = () => {
+    dispatch({
+      type: ADD_PRODUCT,
+      payload: { name, country, price: priceValue, id: id },
+    });
+  };
+
+  const removeToCart = () => {
+    dispatch({
+      type: REMOVE_PRODUCT,
+      payload: id,
+    });
+  };
+
   if (countryExist) {
     return (
       <Link to={`/CoffeePage/${id}`}>
@@ -35,6 +55,8 @@ export default function CoffeeCatalogItem({
             >
               Buy ME
             </button>
+            <button onClick={addToCart}> Add to Cart </button>
+            <button onClick={removeToCart}>Remove to Cart</button>
           </div>
         </div>
       </Link>

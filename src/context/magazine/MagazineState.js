@@ -12,9 +12,9 @@ const MagazineState = ({ children }) => {
   // const [state, dispatch] = useContext(magazineContext);
   const initialState = {
     products: [
-      { name: "Coffee Brazil1", price: 2000, country: "Brazil", id: 1 },
-      { name: "Coffee Brazil2", price: 3000, country: "Brazil", id: 2 },
-      { name: "Coffee Brazil3", price: 4000, country: "Brazil", id: 3 },
+      { name: "Coffee Brazil1", price: 2000, country: "Brazil", id: 10 },
+      { name: "Coffee Brazil2", price: 3000, country: "Brazil", id: 20 },
+      { name: "Coffee Brazil3", price: 4000, country: "Brazil", id: 30 },
     ],
     count: 1000000,
   };
