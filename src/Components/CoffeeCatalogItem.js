@@ -35,7 +35,7 @@ export default function CoffeeCatalogItem({
   const removeToCart = () => {
     dispatch({
       type: REMOVE_PRODUCT,
-      payload: id,
+      payload: { id: id },
     });
   };
 
@@ -56,7 +56,14 @@ export default function CoffeeCatalogItem({
               Buy ME
             </button>
             <button onClick={addToCart}> Add to Cart </button>
-            <button onClick={removeToCart}>Remove to Cart</button>
+
+            {state.products.findIndex((item) => {
+              return item.id === id;
+            }) !== -1 ? (
+              <button onClick={removeToCart}>Remove to Cart</button>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </Link>

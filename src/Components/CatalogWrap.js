@@ -13,7 +13,7 @@ export default function CatalogWrap({ coffeeCatalog, countryExist }) {
     return (
       <div class="best__wrapper">
         {coffeeCatalog.map((item) => {
-          console.log(item.id);
+          // console.log(item.id);
           return (
             <CoffeeCatalogItem
               id={item.id}
